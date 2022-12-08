@@ -12,7 +12,7 @@
 /.next/
 /out/
 /.idea/
-/music
+/music/
 
 # production
 /build
