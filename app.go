@@ -68,6 +68,7 @@ func serveDir(w http.ResponseWriter, r *http.Request, path string) {
 	if err != nil {
 		log.Println(err)
 	}
+	SortFileNameAscend(files)
 
 	fileinfos := make([]FileInfo, len(files), len(files))
 
@@ -76,13 +77,22 @@ func serveDir(w http.ResponseWriter, r *http.Request, path string) {
 		fileinfos[i].IsDir = files[i].IsDir()
 		fileinfos[i].Mode = files[i].Mode()
 	}
-	sort.Slice(files, func(i, j int) bool {
-		return files[i].Name() > files[j].Name()
-	})
 
 	j := json.NewEncoder(w)
 
 	if err := j.Encode(&fileinfos); err != nil {
 		log.Println(err)
 	}
+}
+
+func SortFileNameAscend(files []os.FileInfo) {
+	sort.Slice(files, func(i, j int) bool {
+		return files[i].Name() < files[j].Name()
+	})
+}
+
+func SortFileNameDescend(files []os.FileInfo) {
+	sort.Slice(files, func(i, j int) bool {
+		return files[i].Name() > files[j].Name()
+	})
 }
