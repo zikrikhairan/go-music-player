@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"sort"
 )
 
 type FileInfo struct {
@@ -75,6 +76,9 @@ func serveDir(w http.ResponseWriter, r *http.Request, path string) {
 		fileinfos[i].IsDir = files[i].IsDir()
 		fileinfos[i].Mode = files[i].Mode()
 	}
+	sort.Slice(files, func(i, j int) bool {
+		return files[i].Name() > files[j].Name()
+	})
 
 	j := json.NewEncoder(w)
 
