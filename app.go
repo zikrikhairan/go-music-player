@@ -23,7 +23,7 @@ const (
 func main() {
 	http.HandleFunc("/", playerMainFrame)
 	http.HandleFunc(filePrefix, File)
-	err := http.ListenAndServe(":53405", nil)
+	err := http.ListenAndServe(":8090", nil)
 	if err != nil {
 		return
 	}
