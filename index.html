@@ -71,11 +71,9 @@
             $('#prev').click(prev);
             $('#loop').click(loop);
             $(document).keydown(function(event){
-                console.log(event)
                 var key = event.which || event.keyCode
                 if (key === 32) { // space
                     event.preventDefault();
-                    console.log(player)
                     player[0].paused ? player[0].play() : player[0].pause()
                 } else if (key === 37) { // left arrow
                     event.preventDefault();
